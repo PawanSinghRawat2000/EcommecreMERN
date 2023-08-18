@@ -9,13 +9,8 @@ const path=require('path')
 
 app.use(express.json({limit:"10mb"}))
 app.use(cookieParser())
-const corsOptions ={
-    origin:'http://localhost:3000',
-    'Content-Type': 'Authorization',
-    credentials:true,
-    optionSuccessStatus:200
-    }
-    app.use(cors(corsOptions));
+
+    app.use(cors());
 app.use(express.urlencoded({extended:true,limit:"10mb"}))
 app.use(fileUpload())
 
@@ -34,11 +29,11 @@ app.use('/api/v1',user)
 app.use('/api/v1',order)
 app.use('/api/v1',payment)
 
-app.use(express.static(path.join(__dirname,"../frontend/build")))
+// app.use(express.static(path.join(__dirname,"../frontend/build")))
 
-app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname,"../frontend/build/index.html"))
-})
+// app.get("*",(req,res)=>{
+//     res.sendFile(path.resolve(__dirname,"../frontend/build/index.html"))
+// })
 
 //middleware
 app.use(errorHandler) 
